@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Compass</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563EB'/%3E%3Cstop offset='1' stop-color='%237C3AED'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='url(%23g)'/%3E%3Cpolygon points='24,4 39,10 24,16 9,10' fill='%23fff'/%3E%3Ccircle cx='24' cy='30' r='12' fill='none' stroke='%23fff' stroke-width='2.8'/%3E%3Cpolygon points='24,21 27.5,30 20.5,30' fill='%23fff'/%3E%3Cpolygon points='27.5,30 24,39 20.5,30' fill='%23fff' fill-opacity='.45'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1E2347;--nav:#1E3A8A;--bg:#F6F7FD;--card:#fff;--brand:#2563EB;--brand-d:#1D4ED8;--accent:#7C3AED;--line:#DCE1F2;--muted:#586079;--soft:#EEF2FF}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--brand-d)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+header{background:var(--nav);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:1040px;margin:auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.logo div{white-space:nowrap}.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem}.logo .nm{line-height:1.2}.tag{display:block;font-size:.7rem;font-weight:600;color:#C7D2FE;line-height:1.2}.logo span{color:#C4B5FD}
+nav{display:flex;gap:4px}
+nav button{background:none;border:0;color:#C7D2FE;padding:8px 14px;border-radius:8px;font-weight:600}
+nav button.on,nav button:hover{background:#3151B7;color:#fff}
+main{max-width:1040px;margin:auto;padding:24px 16px 56px}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:0 0 12px;font-weight:800}
+h2{font-size:1.4rem;margin:28px 0 12px}h3{margin:0 0 6px}
+.muted{color:var(--muted)}
+.hero{display:grid;gap:24px;grid-template-columns:1.4fr 1fr;align-items:center;margin-bottom:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.btn{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:600}
+.btn:hover{filter:brightness(.92)}
+.btn.alt{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.alt:hover{border-color:var(--brand)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.prog{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent));border-radius:99px;transition:width .3s}
+.small{font-size:.88rem}
+.note{background:#F3EEFF;border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;font-size:.92rem}
+/* quiz */
+.opts{display:grid;gap:10px;margin:16px 0}
+.opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--brand);background:var(--soft)}
+.opt input{accent-color:var(--brand);width:18px;height:18px}
+.err{color:#B3261E;font-size:.92rem;min-height:1.4em}
+.rank{display:inline-block;background:var(--accent);color:#fff;font-weight:800;border-radius:99px;padding:2px 12px;font-size:.85rem;margin-bottom:8px}
+/* roadmap */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:8px 16px;font-weight:600}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.tl{border-left:3px solid var(--line);margin-left:10px;padding-left:20px}
+.ph{position:relative;margin-bottom:18px}
+.ph::before{content:"";position:absolute;left:-30px;top:20px;width:15px;height:15px;border-radius:50%;background:var(--brand);border:3px solid var(--bg)}
+.task{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.task input{margin-top:6px;width:18px;height:18px;accent-color:var(--brand);flex:none}
+.task.done span{text-decoration:line-through;color:var(--muted)}
+.res{display:inline-block;margin-left:6px;font-size:.82rem;background:var(--soft);padding:1px 9px;border-radius:99px;text-decoration:none;font-weight:600}
+@media(max-width:480px){.tag{display:none}}
+@media(max-width:700px){.hero{grid-template-columns:1fr}.bar{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="logo"><svg width="40" height="40" viewBox="0 0 48 48" role="img" aria-label="Career Compass logo"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#lg)"/><polygon points="24,4 39,10 24,16 9,10" fill="#fff"/><circle cx="24" cy="30" r="12" fill="none" stroke="#fff" stroke-width="2.8"/><polygon points="24,21 27.5,30 20.5,30" fill="#fff"/><polygon points="27.5,30 24,39 20.5,30" fill="#fff" fill-opacity=".45"/></svg><div><div class="nm">Career <span>Compass</span></div><small class="tag">Discover Your Path. Build Your Future.</small></div></div>
+<nav id="nav"><button data-v="home">Home</button><button data-v="quiz">Find careers</button><button data-v="road">Roadmaps</button></nav></div></header>
+<main id="app"></main>
+
+<script>
+/* ---------- SAMPLE DATA (edit this to add or change careers) ---------- */
+const CAREERS={
+DA:{name:"Data Analyst",about:"Data analysts collect and study numbers to help organisations make better decisions.",fit:"It suits people who like numbers, patterns and finding answers in data.",
+ph:[["Step 1: Skills to learn first",[["Revise maths basics: percentages, averages, simple statistics","Khan Academy|https://www.khanacademy.org/math/statistics-probability"],["Learn Excel or Google Sheets: formulas, sorting, pivot tables","Google Sheets Help|https://support.google.com/docs"],["Learn basic SQL: SELECT, WHERE, JOIN, GROUP BY","SQLZoo|https://sqlzoo.net"]]],
+["Step 2: Core tools",[["Learn Python basics and the pandas library","Kaggle Learn|https://www.kaggle.com/learn"],["Learn to build charts and dashboards in Power BI Desktop (free)","Microsoft Learn|https://learn.microsoft.com/en-us/training/powerplatform/power-bi"],["Understand mean, median and correlation",""]]],
+["Step 3: Practical project ideas",[["Analyse a free dataset (for example IPL matches) and share 3 findings","Kaggle Datasets|https://www.kaggle.com/datasets"],["Build a dashboard on your own monthly spending",""],["Clean a messy spreadsheet and explain each step",""]]],
+["Step 4: Build your portfolio",[["Create a free GitHub account and upload each project with a README","GitHub|https://github.com"],["Write a short summary for each project: question, method, result",""],["Create a LinkedIn profile that links to your projects",""]]],
+["Step 5: Internship and job preparation",[["Practise SQL questions every week","HackerRank|https://www.hackerrank.com/domains/sql"],["Prepare to explain two projects in 2 minutes",""],["Make a one-page resume and apply for internships","Internshala|https://internshala.com"]]]]},
+WD:{name:"Web Developer",about:"Web developers build websites and web apps that people use every day.",fit:"It suits people who like building things, solving logic problems and seeing their work live.",
+ph:[["Step 1: Skills to learn first",[["Learn HTML and CSS","freeCodeCamp|https://www.freecodecamp.org"],["Learn how the web works","MDN Learn|https://developer.mozilla.org/en-US/docs/Learn"],["Install VS Code (free code editor)","VS Code|https://code.visualstudio.com"]]],
+["Step 2: Core skills",[["Learn JavaScript basics","javascript.info|https://javascript.info"],["Learn responsive design: Flexbox and Grid",""],["Learn Git and GitHub basics","GitHub Docs|https://docs.github.com/en/get-started"],["Optional: start learning React","React Docs|https://react.dev/learn"]]],
+["Step 3: Practical project ideas",[["Build a personal portfolio page",""],["Build a to-do list app that saves data with localStorage",""],["Build a quiz app or a simple calculator",""]]],
+["Step 4: Build your portfolio",[["Host your projects free on GitHub Pages","GitHub Pages|https://pages.github.com"],["Pick your 3 best projects and add live links",""],["Write a clear README for each project",""]]],
+["Step 5: Internship and job preparation",[["Rebuild a popular website's layout for practice",""],["Revise HTML, CSS and JavaScript interview questions",""],["Apply for internships and try an open-source beginner issue","Internshala|https://internshala.com"]]]]},
+BA:{name:"Business Analyst",about:"Business analysts understand a company's problems and suggest practical solutions.",fit:"It suits people who like business, communication and connecting teams with solutions.",
+ph:[["Step 1: Skills to learn first",[["Understand how businesses work: sales, operations, finance","Investopedia|https://www.investopedia.com"],["Practise clear writing: emails, short reports",""],["Learn Excel or Google Sheets","Google Sheets Help|https://support.google.com/docs"]]],
+["Step 2: Core skills",[["Learn requirements, user stories and process maps",""],["Learn basic SQL","SQLZoo|https://sqlzoo.net"],["Learn Power BI basics","Microsoft Learn|https://learn.microsoft.com/en-us/training/powerplatform/power-bi"],["Learn Agile and Scrum basics","Scrum Guide|https://scrumguides.org"]]],
+["Step 3: Practical project ideas",[["Write requirements for an app for a local shop or canteen",""],["Draw a process map of online food ordering","diagrams.net|https://www.diagrams.net"],["Write 10 user stories for a college library app",""],["Analyse sales data and recommend 3 actions",""]]],
+["Step 4: Build your portfolio",[["Turn each project into a one-page case study (PDF)",""],["Keep all case studies in one shared Google Drive folder",""],["Add them to your LinkedIn profile",""]]],
+["Step 5: Internship and job preparation",[["Practise case questions like 'How would you improve this service?'",""],["Learn the STAR method to answer interview questions",""],["Apply for business and operations internships","Internshala|https://internshala.com"]]]]},
+DM:{name:"Digital Marketer",about:"Digital marketers help brands reach people online using content, search, social media and ads.",fit:"It suits people who like creativity, writing, social media and understanding what people like.",
+ph:[["Step 1: Skills to learn first",[["Learn the basics: SEO, social media, email, ads","Google Skillshop|https://skillshop.withgoogle.com"],["Take a free marketing course","HubSpot Academy|https://academy.hubspot.com"],["Practise writing short, clear posts",""]]],
+["Step 2: Core skills",[["Learn Google Analytics basics","Google Skillshop|https://skillshop.withgoogle.com"],["Learn to design posters and reels in Canva","Canva|https://www.canva.com"],["Check what people search for","Google Trends|https://trends.google.com"]]],
+["Step 3: Practical project ideas",[["Run a page on one topic for 30 days and track results",""],["Write 4 blog posts on topics you know well",""],["Plan a 1-month content calendar for a local business",""],["Test two post styles and note which works better",""]]],
+["Step 4: Build your portfolio",[["Make a free portfolio site","Google Sites|https://sites.google.com"],["Show screenshots with real numbers (views, likes, clicks)",""],["Write what you tried, what worked and what you learned",""]]],
+["Step 5: Internship and job preparation",[["Earn free certificates from Skillshop or HubSpot",""],["Learn to read basic metrics: reach, clicks, conversions",""],["Offer a free small task to a local shop, then apply for internships","Internshala|https://internshala.com"]]]]},
+GOV:{name:"Government Job Aspirant",about:"Many students prepare for government exams such as UPSC, SSC, banking, railways and state services.",fit:"It suits people who value stability, public service, and steady, disciplined study.",
+ph:[["Step 1: Know your exam options",[["Learn about the main exams","UPSC|https://upsc.gov.in"],["Check SSC exams","SSC|https://ssc.gov.in"],["Check banking exams","IBPS|https://www.ibps.in"],["Read the official notice for age, education and attempts",""]]],
+["Step 2: Subjects and skills to learn",[["Read NCERT books (class 6 to 12) for basics","NCERT|https://ncert.nic.in/textbook.php"],["Practise maths, aptitude and reasoning",""],["Read a newspaper daily and follow government news","PIB|https://pib.gov.in"],["Study polity, history, geography and economy basics",""]]],
+["Step 3: Practice ideas",[["Solve previous years' question papers",""],["Take one mock test every week and note your mistakes",""],["Make short notes and revise them weekly",""],["Practise writing answers in a time limit",""]]],
+["Step 4: Documents and backup plan",[["Keep documents ready: certificates, ID, category certificate if any",""],["Keep a log of your mock test scores",""],["Learn one extra skill (for example Excel or typing) as a backup",""]]],
+["Step 5: Applying and interview preparation",[["Apply only through official websites and notifications",""],["Never pay money to anyone who promises a job",""],["Prepare for interviews: current affairs, your hobbies, your state",""]]]]}
+};
+const ORDER=Object.keys(CAREERS);
+
+/* ---------- QUESTIONS: "DA2" means 2 points for Data Analyst ---------- */
+const o=(t,w="")=>({t,w});
+const Q=[
+{id:"edu",t:"What is your education level?",m:0,o:[o("Class 10 or below"),o("Class 11 or 12"),o("Diploma or ITI"),o("Graduate (BA, BSc, BCom, BTech, etc.)"),o("Postgraduate")]},
+{id:"sub",t:"Which subjects do you like most?",m:1,o:[o("Mathematics","DA2 BA1"),o("Computer Science / IT","WD2 DA1"),o("Commerce, Economics or Accounts","BA2 DA1"),o("English or other languages","DM2 GOV1 BA1"),o("History, Civics or Political Science","GOV2"),o("Science (Physics, Chemistry, Biology)","DA1 GOV1"),o("Art or Design","DM2 WD1")]},
+{id:"int",t:"What are you interested in?",m:1,o:[o("Finding patterns in numbers","DA3"),o("Building websites or apps","WD3"),o("Understanding how businesses work","BA3"),o("Social media and creating content","DM3"),o("Serving the public or the country","GOV3"),o("Making things look good","WD1 DM2")]},
+{id:"ski",t:"Which skills do you already have?",m:1,o:[o("Excel or Google Sheets","DA2 BA1"),o("Basic coding","WD2 DA1"),o("Writing","DM2 GOV1 BA1"),o("Speaking or presenting","BA2 DM1 GOV1"),o("General knowledge and reading news","GOV3"),o("Canva, photo or video editing","DM2"),o("Logical reasoning","DA1 WD1 GOV1"),o("None yet, I am starting fresh")]},
+{id:"sty",t:"How do you like to work?",m:0,o:[o("Quietly and alone, with deep focus","DA2 WD2"),o("Closely with a team","BA2 DM1"),o("On creative tasks that keep changing","DM2 WD1"),o("With clear rules and a steady routine","GOV3"),o("By talking to people and clients","BA2 DM1")]},
+{id:"pre",t:"What do you want from a career?",m:1,o:[o("Job security and stability","GOV3"),o("Fast salary growth","DA1 WD1 BA1"),o("Freelance or remote work","WD2 DM2 DA1"),o("Creative work","DM2 WD1"),o("Helping society","GOV2"),o("Learning new technology","WD2 DA2")]}
+];
+const parse=w=>{const r={};w.split(" ").filter(Boolean).forEach(x=>{const m=x.match(/^([A-Z]+)(\d)$/);r[m[1]]=+m[2]});return r};
+
+/* ---------- SAVED DATA (localStorage) ---------- */
+let S={done:{},last:null};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem("careerpath_v1")))}catch(e){}
+const save=()=>{try{localStorage.setItem("careerpath_v1",JSON.stringify(S))}catch(e){}};
+const ids=k=>CAREERS[k].ph.flatMap((p,i)=>p[1].map((t,j)=>k+i+"_"+j));
+const pct=k=>{const a=ids(k);return Math.round(a.filter(i=>S.done[i]).length/a.length*100)};
+
+/* ---------- PAGES ---------- */
+const app=document.getElementById("app");
+let step=0,ans={},cur=S.last||"DA";
+
+function go(v){
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  if(v==="home")home();
+  if(v==="quiz"){step=0;ans={};quiz()}
+  if(v==="road")road();
+  window.scrollTo(0,0);
+}
+document.getElementById("nav").onclick=e=>{if(e.target.dataset.v)go(e.target.dataset.v)};
+const openRoad=k=>{cur=k;S.last=k;save();go("road")};
+
+function home(){
+  const cards=ORDER.map(k=>`<div class="card"><h3>${CAREERS[k].name}</h3><div class="small muted">${pct(k)}% complete</div><div class="prog"><i style="width:${pct(k)}%"></i></div><button class="btn alt" onclick="openRoad('${k}')">${pct(k)?"Continue":"Start"} roadmap</button></div>`).join("");
+  app.innerHTML=`<div class="hero"><div><h1>Discover Your Path. Build Your Future.</h1>
+  <p class="muted">Answer a few questions to see career ideas, follow a free step-by-step roadmap, and track your progress.</p>
+  <div class="row"><button class="btn" onclick="go('quiz')">Find careers for me</button><button class="btn alt" onclick="go('road')">Browse roadmaps</button></div></div>
+  <div class="card"><h3>Your dashboard</h3><p class="muted small">${S.last?`Last roadmap: <b>${CAREERS[S.last].name}</b>`:"You have not started a roadmap yet."}</p>${S.last?`<div class="prog"><i style="width:${pct(S.last)}%"></i></div><button class="btn" onclick="openRoad('${S.last}')">Continue learning</button>`:`<button class="btn" onclick="go('quiz')">Take the questionnaire</button>`}</div></div>
+  <h2>Your progress</h2><div class="grid">${cards}</div>
+  <p class="small muted">Your progress is saved only in this browser on this device. <button class="btn alt small" onclick="if(confirm('Delete all saved progress?')){S={done:{},last:null};save();home()}">Reset progress</button></p>`;
+}
+
+function quiz(){
+  const q=Q[step],sel=ans[q.id]||[];
+  app.innerHTML=`<div class="card"><div class="small muted">Question ${step+1} of ${Q.length}</div><div class="prog"><i style="width:${(step+1)/Q.length*100}%"></i></div>
+  <fieldset style="border:0;padding:0;margin:0"><legend><h2 style="margin:12px 0 0">${q.t}</h2></legend><p class="small muted">${q.m?"Choose all that apply.":"Choose one."}</p>
+  <div class="opts">${q.o.map((x,i)=>`<label class="opt"><input type="${q.m?"checkbox":"radio"}" name="q" value="${i}" ${sel.includes(i)?"checked":""}>${x.t}</label>`).join("")}</div></fieldset>
+  <div class="err" id="err"></div>
+  <div class="row"><button class="btn alt" ${step?"":"disabled"} id="back">Back</button><button class="btn" id="next">${step===Q.length-1?"See my results":"Next"}</button></div></div>`;
+  document.getElementById("back").onclick=()=>{step--;quiz()};
+  document.getElementById("next").onclick=()=>{
+    ans[q.id]=[...document.querySelectorAll("input[name=q]:checked")].map(i=>+i.value);
+    if(!ans[q.id].length){document.getElementById("err").textContent="Please choose at least one option to continue.";return}
+    step===Q.length-1?results():(step++,quiz());
+  };
+}
+
+function results(){
+  const sc={},why={};ORDER.forEach(k=>{sc[k]=0;why[k]=[]});
+  Q.forEach(q=>(ans[q.id]||[]).forEach(i=>{const w=parse(q.o[i].w);for(const k in w){sc[k]+=w[k];why[k].push(q.o[i].t)}}));
+  const top=[...ORDER].sort((a,b)=>sc[b]-sc[a]).slice(0,3);
+  const edu=Q[0].o[ans.edu[0]].t;
+  app.innerHTML=`<h1 style="font-size:2rem">Three careers to explore</h1>
+  <div class="note">These are ideas based only on your answers and simple sample rules. They are not a final decision. No AI model is used. Try roadmaps, talk to teachers or family, and see what feels right.</div>
+  <p class="muted small">Education level you chose: ${edu}</p>
+  <div class="grid" style="margin-top:14px">${top.map((k,n)=>`<div class="card"><span class="rank">Option ${n+1}</span><h3>${CAREERS[k].name}</h3><p>${CAREERS[k].about}</p>
+  <p><b>Why it might suit you:</b> ${CAREERS[k].fit}${why[k].length?` You chose: ${[...new Set(why[k])].slice(0,4).join(", ")}.`:""}</p>
+  <button class="btn" onclick="openRoad('${k}')">View roadmap</button></div>`).join("")}</div>
+  <p><button class="btn alt" onclick="go('quiz')">Retake questionnaire</button></p>`;
+}
+
+function road(){
+  const c=CAREERS[cur];
+  app.innerHTML=`<h1 style="font-size:2rem">Career roadmaps</h1>
+  <div class="chips">${ORDER.map(k=>`<button class="chip ${k===cur?"on":""}" onclick="cur='${k}';S.last='${k}';save();road()">${CAREERS[k].name}</button>`).join("")}</div>
+  <div class="card"><h3>${c.name}</h3><p class="muted">${c.about}</p><div class="small"><b id="ptxt">${pct(cur)}% complete</b></div><div class="prog"><i id="pbar" style="width:${pct(cur)}%"></i></div></div>
+  <h2>Follow the steps in order</h2><div class="tl">${c.ph.map((p,i)=>`<div class="ph card"><h3>${p[0]}</h3>${p[1].map((t,j)=>{const id=cur+i+"_"+j,l=t[1]?t[1].split("|"):null;
+  return `<label class="task ${S.done[id]?"done":""}"><input type="checkbox" data-id="${id}" ${S.done[id]?"checked":""}><span>${t[0]}${l?` <a class="res" href="${l[1]}" target="_blank" rel="noopener">Free: ${l[0]}</a>`:""}</span></label>`}).join("")}</div>`).join("")}</div>
+  <p class="small muted">Links go to free websites. Websites can change, so check that a course is still free.</p>`;
+  app.querySelectorAll(".task input").forEach(cb=>cb.onchange=()=>{
+    S.done[cb.dataset.id]=cb.checked;if(!cb.checked)delete S.done[cb.dataset.id];save();
+    cb.closest(".task").classList.toggle("done",cb.checked);
+    document.getElementById("pbar").style.width=pct(cur)+"%";document.getElementById("ptxt").textContent=pct(cur)+"% complete";
+  });
+}
+go("home");
+</script>
+</body>
+</html>
